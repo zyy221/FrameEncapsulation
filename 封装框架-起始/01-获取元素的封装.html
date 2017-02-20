@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    	<div>div</div>
+	    <p>p</p> 
+	    <div>div</div>
+	    <span>span</span>
+	    <p>p</p> 
+	    <div>div</div>
+    	<script>
+    	//封装 使用sqa获取元素
+    	function select(element){
+    		return document.querySelectorAll( element );//此时获取的是伪数组
+    	}
+    	var nodes = select( 'div , p' );
+    	console.log( nodes );
+    	</script>
+    </body>
+</html>

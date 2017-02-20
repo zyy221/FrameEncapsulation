@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="Itcast.core.js"></script>
+        <script src="Itcast.dom.js"></script>
+        <style>
+			div {
+            	width: 400px;
+            	height: 150px;
+            	border: 1px dashed red;
+            	margin: 10px 0;
+        	}
+        	p {
+            	border: 1px solid blue;
+        	}
+        </style>
+    </head>
+    <body>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    <script>
+    Itcast.fn.appendTo = function(arr){
+
+    	// var tmp = [], tmpNode;
+    	// for(var i=0 ; i<arr.length; i++){
+    	// 	if( i == arr.length-1){
+    	// 		tmp.push = this[0];
+    	// 		arr[i].appendChild(this[0]);
+    	// 	}else{
+    	// 		tmpNode = this[0].cloneNode(true);
+    	// 		tmp.push(tmpNode);
+    	// 		arr[i].appendChild(tmpNode);
+    	// 	}
+
+    	// }
+    	
+    	var tmp = [],tmpNode;
+    	for(var i=0;i<arr.length;i++){
+    		tmpNode = i == arr.length - 1 ? this[0] : this[0].cloneNode(true);
+    		tmp.push(tmpNode);
+    		arr[i].appendChild(tmpNode);
+    	}
+    	return tmp;
+    }
+    </script>
+    <script>
+    	I("<p>pppp</p>").appendTo(I("div"));
+    </script>
+    </body>
+</html>

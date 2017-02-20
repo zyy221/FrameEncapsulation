@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="Itcast.js"></script>
+    </head>
+    <body>
+    	<div class="containter"></div>
+    </body>
+    <script>
+    var lis = '测试数据,测试数据,测试数据,测试数据,测试数据,测试数据,测试数据,测试数据'.split(',');
+    // console.log(lis);
+    new F(".containter")[0].innerHTML = '<ul>' + F.map(lis , function( v , i ){
+    														return '<li>' + v + '</li>';
+    													}).join('') + '</ul>';
+
+    //添加事件
+    new F( '.containter ul li' ).each( function ( i, v ) {
+        v.onmouseover = function () {
+            this.style.backgroundColor = 'yellow';
+        };
+    }).each(function(){
+    	this.onmouseout = function(){
+    		this.style.backgroundColor = '';
+    	}
+    })
+    </script>
+</html>

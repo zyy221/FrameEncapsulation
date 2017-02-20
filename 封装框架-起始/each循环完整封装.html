@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    	<div>div</div>
+	    <p>p</p> 
+	    <div>div</div>
+	    <span>span</span>
+	    <p>p</p> 
+	    <div>div</div>
+	</body>
+	<script>
+	function isArrLike(obj){
+		if(Object.prototype.toString.call(obj) ==' [object Array] '){
+			return true;
+		}
+		var length = 'length' in obj && obj.length ;
+		return typeof length === 'number' && length >=0;
+	}
+
+	function each(arr ,callback){
+		if( isArrLike( arr )){
+			for(var i=0; i<arr.length; i++){
+				if(callback.call( arr[i] , arr[i] , i) === false) break;
+			}
+		}else{
+			for(var k in arr){
+				if(callback.call( arr[k] , arr[k] , k) === false) break;
+			}
+		}
+		return arr;
+	}
+
+	var o={
+		name:"jim",
+		age:20
+	}
+
+	each(o , function( v , i ){
+		console.log(this);
+		console.log( v + "," + i);
+	});
+	</script>
+</html>

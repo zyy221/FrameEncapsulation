@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="src/Itcast.core.js"></script>
+    <script src="src/Itcast.dom.js"></script>
+
+    <script>
+
+        var arr = [],
+                push = arr.push;
+        Itcast.insertAfter = function(currentNode , iobjNode){
+            var nextNode = iobjNode.nextSibling;
+
+            if(nextNode){
+                nextNode.parentNode.insertBefore(currentNode , nextNode);
+            }else{
+                iobjNode.parentNode.appendChild(currentNode);
+            }
+        }
+
+        Itcast.fn.insertAfter = function(selector){
+
+            var tmp = [], tmpNode;
+            var iobj = this.constructor(selector);
+
+            for(var i=0;i<this.length; i++){
+
+                for(var j=0;j<iobj.length;j++){
+
+                    tmpNode = j == iobj.length - 1? this[i] : this[i].cloneNode(true);
+
+                    tmp.push(tmpNode);
+
+                    Itcast.insertAfter(tmpNode , iobj[j]);
+                }
+            }
+
+            var tmpIobj = this.constructor();
+
+            tmpIobj.prevObject = this;
+
+            push.apply(tmpIobj , tmp);
+
+            return tmpIobj;
+        }
+
+        Itcast.fn.after = function(selector){
+
+            this.constructor(selector).insertAfter(this);
+        }
+    </script>
+    <style>
+        div {
+            border: 1px dashed red;
+            height: 200px;
+            margin: 10px 0;
+        }
+        div>p {
+            border: 1px solid blue;
+            margin: 10px 0;
+        }
+        .c {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+<div></div>
+<div></div>
+</body>
+<script>
+    I( '<p>pp1</p><p>pp2</p>' ).insertAfter( 'div' ).each(function () {
+        this.className = 'c';
+    });
+
+
+     //I( 'div' ).after(  '<p>pp1</p><p>pp2</p>'  );
+
+</script>
+</html></html>

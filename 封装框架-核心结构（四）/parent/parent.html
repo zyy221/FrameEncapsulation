@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../src/Itcast.core.js"></script>
+    <script src="../src/Itcast.dom.js"></script>
+    <script>
+        var arr = [],
+                push = arr.push;
+
+        //去重算法
+        Itcast.contains = function( arr , item){
+            for(var i=0;i<arr.length;i++){
+                if(arr[i] == item){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        Itcast.unique = function(arr){
+            var newArr = [];
+            for(var i=0;i<arr.length; i++){
+                if(!Itcast.contains(newArr , arr[i])){
+                    newArr.push(arr[i]);
+                }
+            }
+            return newArr;
+        }
+
+        Itcast.fn.pushStack = function(array){
+            //创建一个空对象 将参数传入对象中 转换成一个Itcast对象
+            var tmp = this.constructor();
+
+            push.apply(tmp , array);
+
+            tmp.prevObject = this;
+
+            return tmp;
+        }
+
+        Itcast.fn.parent = function(){
+            return this.pushStack(Itcast.unique(this.map(function( v , i){
+                return v.parentNode;
+            })));
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

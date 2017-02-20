@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="Itcast.js"></script>
+</head>
+<body>
+<script>
+    function parseHTML(html){
+        var div=document.createElement("div");
+        div.innerHTML=html;
+        var children=div.childNodes;
+        return children;
+    }
+</script>
+
+<script>
+
+    var divs = parseHTML('<div style="width=400px;height=200px;border=1px solid red">div1</div>'+ '<div style="width=400px;height=200px;border=1px solid red">div2</div>'+
+            '<div style="width=400px;height=200px;border=1px solid red">div3</div>'+
+            '<div style="width=400px;height=200px;border=1px solid red">div4</div>'+
+            '<div style="width=400px;height=200px;border=1px solid red">div5</div>'
+           );
+//    for(var i=0;i<divs.length;i++){
+//        document.body.appendChild(divs[i]);
+//    }//如果直接使用循环遍历，会导致这个“数组”塌陷，后面的一些元素将不会被添加到页面上（body），解决了数组塌陷即可
+    // for(var i=divs.length-1;i>=0;i--){
+    //     document.body.appendChild(divs[i]);
+    // }
+    //另一种解决方案
+    for(var i=0;i<divs.length;i++){
+        document.body.appendChild(divs[i]);
+        i--;
+    }
+    console.log(divs);
+    </script>
+
+</body>
+</html>

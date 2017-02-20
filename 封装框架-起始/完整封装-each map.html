@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    <div class="container"></div>
+    <script>
+    var datas = [
+        { name: 'jim1', age: 19, gender: '男' },
+        { name: 'jim2', age: 9, gender: '男' },
+        { name: 'jim3', age: 29, gender: '女' },
+        { name: 'jim4', age: 39, gender: '女' },
+        { name: 'jim5', age: 49, gender: '男' },
+        { name: 'jim6', age: 59, gender: '女' },
+        { name: 'jim7', age: 69, gender: '男' }
+    ];
+    function isArrayLike(obj){
+    	if(Object.prototype.toString.call(obj) == '[Object Array]'){
+    		return true;
+    	}
+    	var length = 'length' in obj && obj.length;
+    	return typeof length === 'number' && length >=0;
+    }
+    //each封装
+    function each(arr ,callback){
+    	if(isArrayLike( arr )){
+    		if(callback.call( arr[i] , arr[i] , i) === false) break;
+    	}else{
+    		for( var k in arr){
+    			if(callback.call( arr[k] , arr[k] , k) === false ) break;
+    		}
+    	}
+    	return arr;
+    }
+    //map封装
+    function map(arr ,callback){
+    	var newArr = [];
+    	if(isArrayLike( arr )){
+    		if(callback( arr[i] , i) === false ) break;
+    	}else{
+    		for( var k in arr){
+    			if(callback( arr[k] , k) === false ) break;
+    		}
+    	}
+    	return arr;
+    }
+
+    //调用
+    document.querySelector(".container").innerHTML =
+    '<table>' + 
+    	'<thead>' +
+
+    		Object.keys( datas[0] ).map( function( v ){
+    			return '<th>' + v + '</th>';
+    		}).join( '' ) +
+
+    	'</thead>' +
+
+    		'<tbody>' +
+
+    			datas.map( function(item){
+    				return '<tr>' + Object.values( item ).map( function( v ){
+    					return '<td>' + v + '</td>';
+    				}).join( '' )
+    				+ '</tr>'
+    			}).join( '')
+
+    	+ '</tbody>' 	
+
+    + '</table>'
+    </script>
+    </body>
+</html>

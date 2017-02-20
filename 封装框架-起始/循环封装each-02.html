@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    	<div>div</div>
+	    <p>p</p> 
+	    <div>div</div>
+	    <span>span</span>
+	    <p>p</p> 
+	    <div>div</div>
+    </body>
+    <script>
+    //封装
+    function select( element ){
+    	return document.querySelectorAll( element );
+
+    }
+
+    function each( arr, callback){
+    	for(var i=0;i<arr.length;i++){
+    		callback( arr[i] );
+    	}
+    }
+
+    //调用
+    var nodes = select( 'div ,p' );
+    each( nodes , function( v ){
+    	v.style.border = "1px solid red";
+    });
+    </script>
+</html>

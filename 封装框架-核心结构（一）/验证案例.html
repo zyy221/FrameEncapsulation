@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="itcast.js"></script>
+    </head>
+    <body>
+    	<div class="container"></div>
+    </body>
+	<script>
+	var lis = '歌曲列表,歌曲列表,歌曲列表,歌曲列表,歌曲列表,歌曲列表,歌曲列表'.split(',');
+	// console.log(lis);
+
+	new F(".container")[0].innerHTML = '<ul>' + F.map(lis , function( v , i){
+											return '<li>' + v + '</li>';
+										}).join('') + '</ul>';
+
+	//添加事件
+	new F('.container ul li').each(function(i , v){
+		v.onmouseover = function(){
+			this.style.backgroundColor = 'pink';
+		}
+	}).each(function(){
+		this.onmouseout = function(){
+			this.style.backgroundColor = '';
+		}
+	})
+	</script>
+</html>

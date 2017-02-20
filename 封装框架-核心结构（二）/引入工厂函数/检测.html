@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="Itcast.js"></script>
+    </head>
+    <body>
+    	<div class="box"></div>
+    	<div class="control"></div>
+    </body>
+    <script>
+    var lis = '检测,检测,检测,检测,检测,检测,检测,检测'.split(',');
+
+    I('.box')[0].innerHTML = F.map(lis , function( v , i ){
+    				return '<input type="checkbox" />' + v + '<br/>';
+    			}).join('') ;
+    I(".control")[0].innerHTML = '<button id= "btn">click</button>';
+
+    I("#btn")[0].onclick = function(){
+    	I(".box input").each(function( ){
+    		this.checked = true;
+    	});
+    };
+
+    // I( '#btn' )[ 0 ].onclick = function () {
+
+    //     I( '#container input' ).each(function () {
+    //         this.checked = true;
+    //     });
+
+    // };
+
+    </script>
+</html>

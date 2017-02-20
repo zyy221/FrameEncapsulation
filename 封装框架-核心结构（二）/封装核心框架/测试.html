@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="Itcast01.js"></script>
+    </head>
+    <body>
+    	<div class="container"></div>
+    </body>
+    <script>
+    var datas = [
+    	{name:'jim',age:20,sex:'男'},
+    	{name:'jim',age:20,sex:'男'},
+    	{name:'jim',age:20,sex:'男'},
+    	{name:'jim',age:20,sex:'男'},
+    	{name:'jim',age:20,sex:'男'},
+    	{name:'jim',age:20,sex:'男'},
+    	{name:'jim',age:20,sex:'男'},
+    	{name:'jim',age:20,sex:'男'}
+
+    ];
+
+    I(".container")[0].innerHTML = 
+    '<table border="1" width="400">'+
+
+    	'<thead>' + Object.keys(datas[0]).map(function( v ){
+    		return '<th>' + v + '</th>';
+    	}).join('') + '</thead>' +
+
+    	'<tbody>' + datas.map(function(item){
+    		return '<tr>' + Object.values(item).map(function( v ){
+    			return '<td>' + v + '</td>';
+    		}).join('');
+    		+ '</tr>';
+    	}).join('');
+
+    	 + '</tbody>'
+
+    + '</table>'
+
+
+    
+    
+    </script>
+</html>

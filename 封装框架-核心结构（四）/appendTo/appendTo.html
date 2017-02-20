@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="src/Itcast.core.js"></script>
+    <script src="src/Itcast.dom.js"></script>
+    <style>
+        .dv {
+            width: 300px;
+            height: 100px;
+            border: 1px solid red;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<script>
+
+    Itcast.fn.appendTo = function(selector){
+
+        var arr = [],
+            push = arr.push;
+        //得到一个Itcast对象 将this（伪数组）添加到iobj对象中
+        var iobj = this.constructor(selector);
+
+        var tmp = [], tmpNode;
+        //获取传入参数（伪数组）中的每一项遍历
+        for(var i = 0 ; i < this.length ; i++){
+            //
+            for(var j = 0 ; j < iobj.length ; j++){
+
+                tmpNode = j == iobj.length - 1? this[i] : this[i].cloneNode(true);
+
+                tmp.push(tmpNode);
+
+                iobj[j].appendChild(tmpNode);
+            }
+        }
+        //得到一个新的空的Itcast对象
+        var objNode = this.constructor();
+
+        //给新创建的对象添加一个属性 防止链被破坏 记录之前的状态
+        objNode.prevObject = this;
+
+        //将tmp中的元素push到Itcast的新对象里
+        push.apply(objNode , tmp);
+        //返回这个对象
+        return objNode;
+
+    }
+
+    //链被破坏之后 就给他一个end方法恢复
+    //调用end方法的一定是链被破坏过的 就返回 this.prevObject
+    //如果没有被破坏就返回 this.constructor 以保证链式编程
+    Itcast.fn.end = function () {
+        return this.prevObject || this.constructor();
+    };
+
+</script>
+<body>
+<div class="dv"></div>
+<div class="dv"></div>
+<div class="dv"></div>
+</body>
+<script>
+
+    //I("<div>1</div><div>1</div><div>1</div>").appendTo(".dv");
+    //    I("<div>1</div><div>1</div><div>1</div>").appendTo(".dv").each(function(){
+    //        this.style.border = '1px solid red';
+    //    })
+        I("<div>1</div><div>1</div><div>1</div>").appendTo(".dv").each(function(){
+            this.style.border = '1px solid blue';
+        }).end().each(function(){
+            this.style.backgroundColor = 'pink';
+        })
+
+//    I( '<div>1</div><div>2</div><div>3</div><div>4</div>' ).appendTo( '.dv' ).each(function () {
+//        this.style.border = '1px dashed blue';
+//    }).end().each(function () {
+//        this.style.backgroundColor = 'pink';
+//    });
+
+</script>
+</html>

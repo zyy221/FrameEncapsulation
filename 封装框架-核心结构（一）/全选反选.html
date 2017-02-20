@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="jquery-3.0.0.min.js"></script>
+    </head>
+    <body>
+		<div id="container"></div>    
+	    <div id="control"></div>
+    </body>
+    <script>
+    	var arr = [];
+    	for(var i=0; i< 10;i++){
+    		arr.push("歌曲" + i);
+    	}
+
+    	//创建多选框
+    	$($.map(arr , function( v , i){
+    		return '<input type="checkbox"/>' + v + '<br/>';
+    	}).join( '' )).appendTo("#container");
+
+    	//添加按钮
+    	var $btn_all = $('<input type="button" value ="全选" />');
+    	$btn_all.appendTo("#container");
+
+    	var $btn_no = $('<input type="button" value ="全不选" />');
+    	$btn_no.appendTo("#container");
+
+    	var $btn_fan = $('<input type="button" value ="反选" />');
+    	$btn_fan.appendTo("#container");
+
+    	//添加事件
+    	$btn_all.click(function(){
+    		$(":checkbox").prop("checked" , true);
+    	})
+    	$btn_no.click(function(){
+    		$(":checkbox").prop("checked" , false);
+    	})
+    	$btn_fan.click(function(){
+    		$(":checkbox").each(function(){
+    			this.checked = !this.checked;
+    		})
+    	})
+    </script>
+</html>
