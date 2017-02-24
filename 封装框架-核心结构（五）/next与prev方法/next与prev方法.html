@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="../src/Itcast.core.js"></script>
+        <script src="../src/Itcast.dom.js"></script>
+        <script>
+        var arr = [],
+        	push = arr.push,
+        	concat = arr.concat;
+        //工具方法
+        Itcast.extend({
+        	next:function(node){
+        		var tmp = node;
+        		while(tmp = tmp.nextSibling){
+        			if(tmp.nodeType == 1){
+        				return tmp;
+        			}
+        		}
+        		return null;
+        	},
+        	nextAll:function(node){
+        		var tmp = node,
+        			arr = [];
+        		while(tmp = tmp.nextSibling){
+        			if(tmp.nodeType == 1){
+        				arr.push(tmp);
+        			}
+        		}
+        		return arr;
+        	},
+        	prev:function(node){
+        		var tmp = node;
+        		while(tmp = tmp.previousSibling){
+        			if(tmp.nodeType == 1){
+        				return tmp;
+        			}
+        		}
+        		return null;
+        	},
+        	prevAll:function(node){
+        		var tmp = node,
+        			arr = [];
+        		while(tmp = tmp.previousSibling){
+        			if(tmp.nodeType == 1){
+        				arr.push(tmp);
+        			}
+        		}
+        		return arr;
+        	}
+        });
+
+        //添加方法
+        Itcast.fn.extend({
+
+        	next:function(){
+        		return this.pushStack(this.map(function( v ){
+        			return Itcast.next( v );
+        		}) );
+        	},
+        	nextAll:function(){
+        		var arr = this.map(function( v ){
+        			return Itcast.nextAll( v );
+        		});
+        		//扁平化
+        		var arr = arr.concat.apply([] , arr);
+
+        		//去重
+        		var arr = Itcast.unique( arr );
+        		//转化成Itcast对象
+        		return this.pushStack(arr);
+        	},
+        	prev:function(){
+        		return this.pushStack(this.map(function( v ){
+        			return Itcast.prev( v );
+        		}));
+        	},
+        	prevAll:function(){
+        		return this.pushStack(Itcast.unique( [].concat.apply([] ,  this.map(function( v ){
+        			return Itcast.prevAll( v )
+        		}) ) ));
+        	},
+        	siblings:function(){
+        		var prevAll = this.prevAll().toArray();
+        		var nextAll = this.nextAll().toArray();
+
+        		return this.pushStack(prevAll.concat(nextAll));
+        	}
+
+        })
+        </script>
+    </head>
+    <body>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div class="dv">4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    </body>
+    <script>
+    I('.dv').prevAll().each(function(){
+    	this.style.backgroundColor = "pink";
+    }).end().nextAll().each(function(){
+    	this.style.backgroundColor = 'red';
+    }).end().each(function(){
+    	this.style.backgroundColor = 'blue';
+    })
+    </script>
+</html>

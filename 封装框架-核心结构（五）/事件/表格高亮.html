@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="../src/Itcast.core.js"></script>
+        <script src="../src/Itcast.dom.js"></script>
+        <script src="../src/Itcast.event.js"></script>
+
+    </head>
+    <body>
+    <div class="container"></div>
+    </body>
+    <script>
+		var datas = [
+        { name: 'jim1', age: 9, gender: '男' },
+        { name: 'jim2', age: 19, gender: '女' },
+        { name: 'jim3', age: 29, gender: '男' },
+        { name: 'jim4', age: 39, gender: '女' },
+        { name: 'jim5', age: 49, gender: '女' },
+        { name: 'jim6', age: 59, gender: '男' },
+        { name: 'jim7', age: 69, gender: '女' }
+    ];
+
+		I('<table border="1" width="400">'+
+			'<thead>' + Object.keys(datas[0]).map(function( v ){
+				return '<th>' + v +'</th>';
+				}).join( ' ' ) + 
+			'</thead>' +
+			'<tbody>' + 
+			datas.map( function( item ){
+				return '<tr>' + Object.values(item ).map(function( v , i){
+					return '<td>' + v + '</td>';
+				}).join(' ') + '</tr>';
+			}).join( ' ' ) 
+
+			+ '</tbody></table>').appendTo(".container");
+	
+		//事件
+		I('.container tr').on('mouseover' , function(){
+			this.style.backgroundColor = 'pink';
+		}).mouseout(function(){
+			this.style.backgroundColor = '';
+		})
+		</script>
+</html>

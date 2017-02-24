@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="src/Itcast.core.js"></script>
+        <script src="src/Itcast.dom.js"></script>
+    </head>
+    <body>
+    <script>
+    Itcast.extend({
+    	next:function(node){
+    		var tmp = node;
+    		while(tmp = tmp.nextSibling){
+    			if(tmp.nodeType == 1){
+    				return tmp;
+    			}
+    		}
+    		return null;
+    	},
+    	prev:function(node){
+    		var tmp = node;
+    		while(tmp = tmp.previousSibling){
+    			if(tmp.nodeType == 1){
+    				return tmp;
+    			}
+    		}
+    		return null;
+    	}
+    })
+    </script>
+    </body>
+</html>
